@@ -1,12 +1,17 @@
 {
-  "name": "grafica",
-  "version": "1.0.0",
-  "description": "app para automatizar pedidos do whatsapp",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "type": "module",
-  "author": "Pedro Luís Brilhadori",
-  "license": "ISC"
+   "name": "grafica",
+   "version": "1.0.0",
+   "description": "app para automatizar pedidos do whatsapp",
+   "main": "index.js",
+   "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "prepare": "husky install"
+   },
+   "type": "module",
+   "author": "Pedro Luís Brilhadori",
+   "license": "ISC",
+   "devDependencies": {
+      "husky": "^7.0.0",
+      "pretty-quick": "^3.1.3"
+   }
 }

@@ -1,0 +1,7 @@
+# libs and dist 
+/dist
+/node_modules
+
+# pipelines and code coverage
+/.github
+/coverage
