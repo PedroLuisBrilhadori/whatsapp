@@ -2,13 +2,15 @@
 
 import { SessionWhats } from './whatsapp/index.mjs';
 export class App {
-   #app = new SessionWhats({
+   #whatsapp = new SessionWhats({
       session: 'meu-zap',
       headless: false,
    });
 
    run() {
-      this.#app.start();
+      this.#whatsapp.start().then((msg) => {
+         this.#whatsapp.sendMessage({ contact: '120363023770567596@g.us', text: 'whats on!' });
+      });
    }
 
    constructor() {}

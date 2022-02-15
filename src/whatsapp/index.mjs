@@ -8,11 +8,41 @@ export class SessionWhats {
       session: '',
    };
 
-   start() {
-      create(this.#configCreate).then((client) => {
+   async start() {
+      await create(this.#configCreate).then((client) => {
          this.#client = client;
          this.#up = true;
+         client.onMessage((msg) => {
+            console.log(msg);
+         });
       });
+
+      return;
+   }
+
+   sendMessage(message) {
+      if (!this.#up) {
+         this.start();
+         console.error('Iniciando sessão, tente novamente');
+         return;
+      }
+
+      if (!message.text || !message.contact) {
+         console.error('Erro, menssagem não enviada. Revise sua menssagem', {
+            text: message.text,
+            contact: message.contact,
+         });
+         return;
+      }
+
+      this.#client
+         .sendText(message.contact, message.text)
+         .then((result) => {
+            console.log('Result:', result);
+         })
+         .catch((error) => {
+            console.error('Erro ao enviar menssagem:', error);
+         });
    }
 
    constructor(configCreate) {
