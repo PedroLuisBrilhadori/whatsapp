@@ -1,5 +1,5 @@
 import express from 'express';
-import { app } from '../app.mjs';
+import { app } from '../app';
 import { MessageApp } from '../whatsapp/index.js';
 
 const expresApp = express();
