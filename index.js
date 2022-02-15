@@ -1,7 +1,5 @@
 // index for app
 
-import { App } from './src/index.mjs';
-
-const app = new App();
+import { app } from './src/app.mjs';
 
 app.run();

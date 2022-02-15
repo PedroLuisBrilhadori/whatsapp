@@ -4,6 +4,10 @@ export class SessionWhats {
    #client;
    #up = false;
 
+   get up() {
+      return this.#up;
+   }
+
    #configCreate = {
       session: '',
    };
@@ -20,7 +24,9 @@ export class SessionWhats {
       return;
    }
 
-   sendMessage(message) {
+   async sendMessage(message) {
+      let send = false;
+
       if (!this.#up) {
          this.start();
          console.error('Iniciando sessão, tente novamente');
@@ -39,10 +45,14 @@ export class SessionWhats {
          .sendText(message.contact, message.text)
          .then((result) => {
             console.log('Result:', result);
+            send = true;
          })
          .catch((error) => {
             console.error('Erro ao enviar menssagem:', error);
+            send = false;
          });
+
+      return send;
    }
 
    constructor(configCreate) {
