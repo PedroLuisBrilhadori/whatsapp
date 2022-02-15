@@ -1,13 +1,15 @@
 // index for srcs
 
+import { SessionWhats } from './whatsapp/index.mjs';
 export class App {
-  #port = 3000;
+   #app = new SessionWhats({
+      session: 'meu-zap',
+      headless: false,
+   });
 
-  run() {
-    console.log(`app runnning in port ${this.#port}`);
-  }
+   run() {
+      this.#app.start();
+   }
 
-  constructor(appConfig) {
-    this.#port = appConfig.port ? appConfig.port : 3000;
-  }
+   constructor() {}
 }
