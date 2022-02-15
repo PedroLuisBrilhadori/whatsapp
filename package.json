@@ -8,12 +8,12 @@
       "test": "echo \"Error: no test specified\" && exit 1",
       "prepare": "husky install"
    },
-   "type": "module",
    "author": "Pedro Luís Brilhadori",
    "license": "ISC",
    "devDependencies": {
       "husky": "^7.0.0",
-      "pretty-quick": "^3.1.3"
+      "pretty-quick": "^3.1.3",
+      "typescript": "^4.5.5"
    },
    "dependencies": {
       "express": "^4.17.2",

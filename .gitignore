@@ -1,2 +1,6 @@
 # libs and dist
 /node_modules
+/dist
+
+# tokens for whatsapp
+/tokens 
