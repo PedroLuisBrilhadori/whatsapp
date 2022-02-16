@@ -2,9 +2,9 @@
    "name": "grafica",
    "version": "1.0.0",
    "description": "app para automatizar pedidos do whatsapp",
-   "main": "index.js",
+   "main": "./dist/index.js",
    "scripts": {
-      "start": "node --experimental-modules .",
+      "start": "npx tsc && node .",
       "test": "echo \"Error: no test specified\" && exit 1",
       "prepare": "husky install"
    },
