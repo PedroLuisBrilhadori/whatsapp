@@ -1,16 +1,19 @@
 import express from 'express';
-import { app } from '../app.mjs';
+import { app } from '../app';
+import { MessageApp } from '../whatsapp/index.js';
 
 const expresApp = express();
 
 export class ExpressApp {
    // config sever port
-   #port = 3000;
+   private _port = 3000;
 
    // play sever
    run() {
       expresApp.post('/', (req, res) => {
-         app.whatsapp.sendMessage({ contact: req.query.contact, text: req.query.text }).then((msg) => {
+         const message: MessageApp = { contact: req.query.contact, text: req.query.text };
+
+         app.whatsapp.sendMessage(message).then((msg) => {
             if (msg === undefined) {
                res.status(500).send(`Erro, menssagem não enviada! Verifique seu console`);
                return;
@@ -19,12 +22,12 @@ export class ExpressApp {
          });
       });
 
-      expresApp.listen(this.#port, () => {
-         console.log(`app start in port ${this.#port}`);
+      expresApp.listen(this._port, () => {
+         console.log(`app start in port ${this._port}`);
       });
    }
 
-   constructor(expressConfig) {
-      this.#port = expressConfig.port !== undefined ? expressConfig.port : 3000;
+   constructor(port: number) {
+      this._port = port || 3000;
    }
 }
