@@ -2,6 +2,7 @@ import express from 'express';
 import { Response, Request } from 'express';
 import { app } from '../app';
 import { MessageApp } from '../whatsapp/index.js';
+import { ConfigPath } from './interfaces';
 
 const expresApp = express();
 
@@ -29,15 +30,6 @@ export class ExpressApp {
 
       expresApp.get('/', (req: Request, res: Response) => {});
 
-      // get files
-      expresApp.get('/utils/components.css', (req: Request, res: Response) => {
-         res.sendFile(`${__dirname}/templates/utils/components.css`);
-      });
-
-      expresApp.get('/styles/main.css', (req: Request, res: Response) => {
-         res.sendFile(`${__dirname}/templates/menu/styles/main.css`);
-      });
-
       expresApp.listen(this._port, () => {
          console.log(`express sever is running in port: ${this._port}`);
       });
@@ -45,5 +37,24 @@ export class ExpressApp {
 
    constructor(port: number) {
       this._port = port || 3000;
+   }
+}
+
+function _configGetFiles(configPaths: ConfigPath[] | ConfigPath) {
+   if (configPaths.constructor !== Array) {
+      const config = configPaths as ConfigPath;
+
+      expresApp.get(`${config.getPath}`, (req: Request, res: Response) => {
+         res.sendFile(`${__dirname}/${config.path}/${config.getPath}`);
+      });
+
+      return;
+   }
+   const config = configPaths as ConfigPath[];
+
+   for (let i = 0; i < configPaths.length; i++) {
+      expresApp.get(config[i].getPath, (req: Request, res: Response) => {
+         res.sendFile(`${__dirname}/${config[i].path}/${config[i].getPath}`);
+      });
    }
 }
