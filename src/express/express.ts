@@ -29,6 +29,15 @@ export class ExpressApp {
 
       expresApp.get('/', (req: Request, res: Response) => {});
 
+      // get files
+      expresApp.get('/utils/components.css', (req: Request, res: Response) => {
+         res.sendFile(`${__dirname}/templates/utils/components.css`);
+      });
+
+      expresApp.get('/styles/main.css', (req: Request, res: Response) => {
+         res.sendFile(`${__dirname}/templates/menu/styles/main.css`);
+      });
+
       expresApp.listen(this._port, () => {
          console.log(`express sever is running in port: ${this._port}`);
       });

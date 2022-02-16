@@ -1,0 +1,9 @@
+.tool-bar {
+   color: #e7edea;
+   height: 65px;
+   width: 100%;
+   background-color: #030d4f;
+   display: flex;
+   align-content: center;
+   justify-content: center;
+}
