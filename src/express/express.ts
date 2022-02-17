@@ -28,6 +28,7 @@ export class ExpressApp {
          _configGetFiles([
             { path: 'templates', getPath: 'utils/components.css' },
             { path: 'templates/menu', getPath: 'styles/main.css' },
+            { path: 'templates/menu', getPath: 'assets/menu.svg' },
          ]);
 
          res.sendFile(`${__dirname}/templates/menu/index.html`);

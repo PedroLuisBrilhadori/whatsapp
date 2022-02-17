@@ -1,6 +1,7 @@
 body {
    margin: 0;
    background-color: #ceecef;
+   font-family: Verdana, Geneva, Tahoma, sans-serif;
    display: flex;
    flex-direction: column;
    align-items: center;
