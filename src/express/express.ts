@@ -2,7 +2,6 @@ import express from 'express';
 import { Response, Request } from 'express';
 import { app } from '../app';
 import { MessageApp } from '../whatsapp/index.js';
-import { ConfigPath } from './interfaces';
 
 const expresApp = express();
 
