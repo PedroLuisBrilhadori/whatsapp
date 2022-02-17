@@ -25,6 +25,10 @@ export class ExpressApp {
       });
 
       expresApp.get('/menu', (req: Request, res: Response) => {
+         _configGetFiles([
+            { path: 'templates', getPath: 'utils/components.css' },
+            { path: 'templates/menu', getPath: 'styles/main.css' },
+         ]);
          res.sendFile(`${__dirname}/templates/menu/index.html`);
       });
 
@@ -41,10 +45,11 @@ export class ExpressApp {
 }
 
 function _configGetFiles(configPaths: ConfigPath[] | ConfigPath) {
+   console.log(configPaths);
    if (configPaths.constructor !== Array) {
       const config = configPaths as ConfigPath;
 
-      expresApp.get(`${config.getPath}`, (req: Request, res: Response) => {
+      expresApp.get(`/${config.getPath}`, (req: Request, res: Response) => {
          res.sendFile(`${__dirname}/${config.path}/${config.getPath}`);
       });
 
@@ -53,7 +58,7 @@ function _configGetFiles(configPaths: ConfigPath[] | ConfigPath) {
    const config = configPaths as ConfigPath[];
 
    for (let i = 0; i < configPaths.length; i++) {
-      expresApp.get(config[i].getPath, (req: Request, res: Response) => {
+      expresApp.get(`/${config[i].getPath}`, (req: Request, res: Response) => {
          res.sendFile(`${__dirname}/${config[i].path}/${config[i].getPath}`);
       });
    }
