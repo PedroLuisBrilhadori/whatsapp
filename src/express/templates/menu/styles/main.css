@@ -1,17 +1,27 @@
 body {
-   margin: 0;
-   background-color: #ceecef;
-   font-family: Verdana, Geneva, Tahoma, sans-serif;
    display: flex;
    flex-direction: column;
    align-items: center;
+   justify-content: center;
+
+   background-color: #ceecef;
+   font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+   margin: 0;
 }
 
 .kanban {
    display: flex;
    align-items: flex-start;
    justify-items: center;
+   flex-wrap: wrap;
+
    width: 100%;
+   margin-left: 5%;
+}
+
+.kanban-header-content {
+   margin: 5px;
 }
 
 .kanban-drag {
@@ -22,9 +32,9 @@ body {
    box-shadow: 0 0 7px black;
 
    width: 80%;
-   margin: 5%;
+   margin: 3%;
 }
 
-.kanban-drag-content {
+.kanban-margin {
    margin: 5%;
 }
