@@ -12,8 +12,10 @@ export class ExpressApp {
 
    // play sever
    run() {
+      expresApp.use(express.static(`${__dirname}/templates`));
+
       expresApp.post('/', (req: Request, res: Response) => {
-         const message: MessageApp = { contact: req.query.contact, text: req.query.text };
+         const message: MessageApp = { contact: req.query.contact as string, text: req.query.text as string };
 
          app.whatsapp.sendMessage(message).then((msg) => {
             if (msg === undefined) {
@@ -25,12 +27,6 @@ export class ExpressApp {
       });
 
       expresApp.get('/menu', (req: Request, res: Response) => {
-         _configGetFiles([
-            { path: 'templates', getPath: 'utils/components.css' },
-            { path: 'templates/menu', getPath: 'styles/main.css' },
-            { path: 'templates/menu', getPath: 'assets/menu.svg' },
-         ]);
-
          res.sendFile(`${__dirname}/templates/menu/index.html`);
       });
 
@@ -46,24 +42,5 @@ export class ExpressApp {
 
    constructor(port: number) {
       this._port = port || 3000;
-   }
-}
-
-function _configGetFiles(configPaths: ConfigPath[] | ConfigPath) {
-   if (configPaths.constructor !== Array) {
-      const config = configPaths as ConfigPath;
-
-      expresApp.get(`/${config.getPath}`, (req: Request, res: Response) => {
-         res.sendFile(`${__dirname}/${config.path}/${config.getPath}`);
-      });
-
-      return;
-   }
-   const config = configPaths as ConfigPath[];
-
-   for (let i = 0; i < configPaths.length; i++) {
-      expresApp.get(`/${config[i].getPath}`, (req: Request, res: Response) => {
-         res.sendFile(`${__dirname}/${config[i].path}/${config[i].getPath}`);
-      });
    }
 }
