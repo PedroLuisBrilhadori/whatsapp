@@ -29,10 +29,14 @@ export class ExpressApp {
             { path: 'templates', getPath: 'utils/components.css' },
             { path: 'templates/menu', getPath: 'styles/main.css' },
          ]);
+
          res.sendFile(`${__dirname}/templates/menu/index.html`);
       });
 
-      expresApp.get('/', (req: Request, res: Response) => {});
+      expresApp.get('/', (req: Request, res: Response) => {
+         res.send(`
+         <meta http-equiv="refresh" content="0; url = ./menu" />`);
+      });
 
       expresApp.listen(this._port, () => {
          console.log(`express sever is running in port: ${this._port}`);
@@ -45,7 +49,6 @@ export class ExpressApp {
 }
 
 function _configGetFiles(configPaths: ConfigPath[] | ConfigPath) {
-   console.log(configPaths);
    if (configPaths.constructor !== Array) {
       const config = configPaths as ConfigPath;
 
