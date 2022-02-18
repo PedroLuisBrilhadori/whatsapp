@@ -40,7 +40,10 @@ function switchLockColumn(card, button) {
 
    // função para deixar cards draggable = true
    card.children[1].childNodes.forEach((task) => {
-      task.draggable = !task.draggable;
+      if (task.className) {
+         task.className.includes('move') ? task.classList.remove('move') : task.classList.add('move');
+         task.draggable = !task.draggable;
+      }
    });
 }
 
