@@ -2,9 +2,11 @@ import express from 'express';
 import { Response, Request } from 'express';
 import { app } from '../app';
 import { MessageApp } from '../whatsapp/index.js';
+import { TrelloCard } from '../trello/interfaces';
 
 const expresApp = express();
-const apiTrello = 'https://api.trello.com/';
+
+let json = {};
 
 export class ExpressApp {
    // config sever port
@@ -31,29 +33,32 @@ export class ExpressApp {
          res.sendFile(`${__dirname}/templates/menu/index.html`);
       });
 
+      expresApp.get('/trelloCallback', (req: Request, res: Response) => {
+         res.send(json);
+      });
+
       expresApp.post('/trelloCallback', (req: Request, res: Response) => {
-         const shortLinkCard = req.body.action.data.card.shortLink;
-         const actionType = req.body.action.type;
-         const progress = {
-            after: req.body.action.data.listAfter.name,
-            before: req.body.action.data.listBefore.name,
-         };
-         const people = req.body.action.memberCreator.fullName;
-         const date = req.body.action.date;
+         json = req.body;
+         // recebe todos os dados necessários do trello
+         const shortLinkCard = req.body.action.data.card.shortLink || '';
+         const actionType = req.body.action.type || '';
+         const people = req.body.action.memberCreator.fullName || '';
+         const date = req.body.action.date || '';
 
-         console.log({
-            body: req.body,
-            data: req.body.action.data,
-            action: req.body.action,
-         });
-
-         const cardUpdate = {
+         // cria um objeto para manipular os dados vindo do trello
+         const cardUpdate: TrelloCard = {
             shortLink: shortLinkCard,
             type: actionType,
-            progress: progress,
             member: people,
             date: date,
          };
+
+         if (req.body.action.listBefore) {
+            cardUpdate.progress = {
+               after: req.body.action.listAfter.name,
+               before: req.body.action.listBefore.name,
+            };
+         }
 
          res.status(200).send('200');
       });
