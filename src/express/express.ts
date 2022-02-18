@@ -11,8 +11,6 @@ export class ExpressApp {
 
    // play sever
    run() {
-      expresApp.use(express.static(`${__dirname}/templates`));
-
       expresApp.post('/', (req: Request, res: Response) => {
          const message: MessageApp = { contact: req.query.contact as string, text: req.query.text as string };
 
