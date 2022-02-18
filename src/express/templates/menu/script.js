@@ -11,29 +11,43 @@ function buttonsHeaderCard() {
          // adiciona funções de acordo com os botões
 
          if (button.src?.includes('locked')) {
-            // bloqueia e desbloqueia cards
-            button.addEventListener('click', () => {
-               // troca icone
-               let unlocked = 'http://localhost:3000/assets/unlocked-black.svg';
-               let locked = 'http://localhost:3000/assets/locked-black.svg';
-               button.src.includes('unlocked') ? (button.src = locked) : (button.src = unlocked);
+            button.src = 'http://localhost:3000/assets/unlocked-black.svg';
+            switchLockColumn(card);
 
-               // função para deixar cards draggable = true
-               card.children[1].childNodes.forEach((task) => {
-                  task.draggable = !task.draggable;
-               });
+            // bloqueia e desbloqueia cards de acordo com o clique
+            button.addEventListener('click', () => {
+               switchLockColumn(card, button);
             });
          }
 
          if (button.src?.includes('minimize')) {
+            // minimiza coluna de acordo com o clique
             button.addEventListener('click', () => {
-               card.children[1].childNodes.forEach((task) => {
-                  if (task.innerHTML) {
-                     task.attributes.hidden ? task.removeAttribute('hidden') : task.setAttribute('hidden', '');
-                  }
-               });
+               switchMinimizeColumn(card);
             });
          }
       });
+   });
+}
+
+function switchLockColumn(card, button) {
+   if (button) {
+      // troca icone
+      let unlocked = 'http://localhost:3000/assets/unlocked-black.svg';
+      let locked = 'http://localhost:3000/assets/locked-black.svg';
+      button.src.includes('unlocked') ? (button.src = locked) : (button.src = unlocked);
+   }
+
+   // função para deixar cards draggable = true
+   card.children[1].childNodes.forEach((task) => {
+      task.draggable = !task.draggable;
+   });
+}
+
+function switchMinimizeColumn(card) {
+   card.children[1].childNodes.forEach((task) => {
+      if (task.innerHTML) {
+         task.attributes.hidden ? task.removeAttribute('hidden') : task.setAttribute('hidden', '');
+      }
    });
 }
