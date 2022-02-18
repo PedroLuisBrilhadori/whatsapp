@@ -1,8 +1,8 @@
 import express from 'express';
 import { Response, Request } from 'express';
 import { app } from '../app';
-import { MessageApp } from '../whatsapp/index.js';
-import { TrelloCard } from '../trello/interfaces';
+import { MessageApp } from '../whatsapp';
+import { TrelloCard } from '../trello';
 
 const expresApp = express();
 
