@@ -3,4 +3,6 @@
 /dist
 
 # tokens for whatsapp
-/tokens 
+/tokens
+/webhook.sh
+/src/api_secret.ts

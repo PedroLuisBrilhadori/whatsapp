@@ -22,11 +22,11 @@ class App {
 
    // play app
    run() {
-      this._whatsapp.start().then((msg) => {
-         if (this._devMode && this.whatsapp.up) {
-            this._express.run();
-         }
-      });
+      this._express.run();
+      // this._whatsapp.start().then((msg) => {
+      // if (this._devMode && this.whatsapp.up) {
+      // }
+      // });
    }
 
    constructor(configApp: ConfigApp) {
