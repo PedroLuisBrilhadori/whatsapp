@@ -27,7 +27,11 @@ function buttonsHeaderCard() {
 
          if (button.src?.includes('minimize')) {
             button.addEventListener('click', () => {
-               console.log('minimize');
+               card.children[1].childNodes.forEach((task) => {
+                  if (task.innerHTML) {
+                     task.attributes.hidden ? task.removeAttribute('hidden') : task.setAttribute('hidden', '');
+                  }
+               });
             });
          }
       });
