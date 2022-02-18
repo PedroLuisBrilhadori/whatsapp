@@ -5,4 +5,4 @@
 # tokens for whatsapp
 /tokens
 /webhook.sh
-/src/api_secret.ts
+/src/trello/api_secret.ts
