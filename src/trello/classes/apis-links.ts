@@ -1,13 +1,22 @@
 import { TrelloKey, TrelloToken } from '../api_secret';
 
 class ApiTrelloLinks {
-   /** link da api para adicionar funções que não estão no enum */
+   /**
+    * link da api para adicionar funções que não estão na classe
+    * @returns link para requisição na api trello
+    */
    readonly api = 'https://api.trello.com/1';
 
-   /** chaves de autenticação do trello */
+   /**
+    * chaves de autenticação do trello
+    * @returns link para requisição na api trello
+    */
    readonly trelloAuth = `key=${TrelloKey}&token=${TrelloToken}`;
 
-   /** requisição do tipo POST para criar um card novo */
+   /**
+    * requisição do tipo POST para criar um card novo
+    * @returns link para requisição na api trello
+    */
    readonly createCard = `${this.api}/cards?${this.trelloAuth}`;
 
    /**
@@ -49,15 +58,15 @@ class ApiTrelloLinks {
 
    /**
     * requisição do tipo POST para criar webhooks
-    * @param callBackUrl url que será chamada pelo webhook
     * @returns link para requisição na api trello
     */
-   createWebhook(callBackUrl: string) {
-      return `${this.api}/webhooks?callbackURL=${callBackUrl}&idModel=5abbe4b7ddc1b351ef961414&${this.trelloAuth}`;
-   }
+   readonly createWebhook = `${this.api}/tokens/${TrelloToken}/webhooks/?key=${TrelloKey}`;
 
-   /** requisição do tipo GET para listar todos os webhooks */
-   readonly listWebhooks = `${this.api}/tokens/${TrelloToken}/webhooks`;
+   /**
+    * requisição do tipo GET para listar todos os webhooks
+    * @returns link para requisição na api trello
+    */
+   readonly listWebhooks = `${this.api}/tokens/${TrelloToken}/webhooks?key=${TrelloKey}`;
 
    /**
     * requisição do tipo DELETE para deletar um webhook

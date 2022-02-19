@@ -2,7 +2,7 @@ import express from 'express';
 import { Response, Request } from 'express';
 import { app } from '../app';
 import { MessageApp } from '../whatsapp';
-import { TrelloCard } from '../trello';
+import { TrelloCard, trelloApi } from '../trello';
 
 const expresApp = express();
 
@@ -33,8 +33,19 @@ export class ExpressApp {
          res.sendFile(`${__dirname}/templates/menu/index.html`);
       });
 
+      expresApp.get('/test', (req: Request, res: Response) => {
+         trelloApi.listWebHooks().then((hooks) => {
+            console.log(hooks);
+            res.json(hooks);
+         });
+      });
+
       expresApp.get('/trelloCallback', (req: Request, res: Response) => {
-         res.send(json);
+         res.status(200).send('200');
+      });
+
+      expresApp.head('/trelloCallback', (req: Request, res: Response) => {
+         res.status(200).send('200');
       });
 
       expresApp.post('/trelloCallback', (req: Request, res: Response) => {
