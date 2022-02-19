@@ -13,7 +13,7 @@ class App {
    // whatsapp configuration
    private _whatsapp = new SessionWhats({
       session: 'meu-zap',
-      headless: false,
+      multidevice: true,
    });
 
    get whatsapp() {
