@@ -1,4 +1,4 @@
-import { create, CreateOptions, Whatsapp } from 'venom-bot';
+import { create, CreateOptions, Message, Whatsapp } from 'venom-bot';
 import { MessageApp } from './interfaces/message';
 
 export class SessionWhats {
@@ -15,7 +15,7 @@ export class SessionWhats {
       await create(this._configCreate).then((client) => {
          this._client = client;
          this._up = true;
-         client.onMessage((msg) => {});
+         client.onMessage((msg: Message) => {});
       });
 
       return;

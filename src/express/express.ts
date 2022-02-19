@@ -1,4 +1,5 @@
 import express from 'express';
+import { Response, Request } from 'express';
 import { app } from '../app';
 import { MessageApp } from '../whatsapp/index.js';
 
@@ -10,8 +11,10 @@ export class ExpressApp {
 
    // play sever
    run() {
-      expresApp.post('/', (req, res) => {
-         const message: MessageApp = { contact: req.query.contact, text: req.query.text };
+      expresApp.use(express.static(`${__dirname}/templates`));
+
+      expresApp.post('/', (req: Request, res: Response) => {
+         const message: MessageApp = { contact: req.query.contact as string, text: req.query.text as string };
 
          app.whatsapp.sendMessage(message).then((msg) => {
             if (msg === undefined) {
@@ -22,8 +25,17 @@ export class ExpressApp {
          });
       });
 
+      expresApp.get('/menu', (req: Request, res: Response) => {
+         res.sendFile(`${__dirname}/templates/menu/index.html`);
+      });
+
+      expresApp.get('/', (req: Request, res: Response) => {
+         res.send(`
+         <meta http-equiv="refresh" content="0; url = ./menu" />`);
+      });
+
       expresApp.listen(this._port, () => {
-         console.log(`app start in port ${this._port}`);
+         console.log(`express sever is running in port: ${this._port}`);
       });
    }
 
