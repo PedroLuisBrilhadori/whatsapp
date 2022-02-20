@@ -2,29 +2,25 @@ import { create, CreateOptions, Message, Whatsapp } from 'venom-bot';
 import { MessageApp } from './interfaces/message';
 
 export class SessionWhats {
-   private _client: Whatsapp;
-   private _up = false;
+   private _client: Whatsapp | undefined = undefined;
 
    get up() {
-      return this._up;
+      return this._client ? true : false;
    }
 
    private _configCreate: CreateOptions;
 
-   async start() {
-      await create(this._configCreate).then((client) => {
+   start(): Promise<Whatsapp | void> {
+      return create(this._configCreate).then((client) => {
          this._client = client;
-         this._up = true;
          client.onMessage((msg: Message) => {});
       });
-
-      return;
    }
 
    async sendMessage(message: MessageApp) {
       let send = false;
 
-      if (!this._up) {
+      if (!this._client) {
          this.start();
          console.error('Iniciando sessão, tente novamente');
          return;
