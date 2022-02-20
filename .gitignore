@@ -4,3 +4,6 @@
 
 # tokens for whatsapp
 /tokens 
+
+# jest 
+/coverage
