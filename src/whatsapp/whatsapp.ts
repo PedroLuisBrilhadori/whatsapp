@@ -17,13 +17,12 @@ export class SessionWhats {
       });
    }
 
-   async sendMessage(message: MessageApp) {
-      let send = false;
+   sendMessage(message: MessageApp): boolean {
+      let send: boolean = false;
 
       if (!this._client) {
-         this.start();
-         console.error('Iniciando sessão, tente novamente');
-         return;
+         console.log('Menssagem não enviada');
+         return false;
       }
 
       this._client

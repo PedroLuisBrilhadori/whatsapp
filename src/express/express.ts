@@ -11,13 +11,11 @@ export class ExpressApp {
       this.expressApp.post('/', (req: Request, res: Response) => {
          const message: MessageApp = { contact: req.query.contact as string, text: req.query.text as string };
 
-         mainApp.whatsapp.sendMessage(message).then((msg) => {
-            if (msg === undefined) {
-               res.status(500).send(`Erro, menssagem não enviada! Verifique seu console`);
-               return;
-            }
-            res.status(200).send(`Menssagem Enviada!`);
-         });
+         if (mainApp.whatsapp.sendMessage(message)) {
+            res.status(500).send(`Erro, menssagem não enviada! Verifique seu console`);
+            return;
+         }
+         res.status(200).send(`Menssagem Enviada!`);
       });
 
       this.expressApp.get('/menu', (req: Request, res: Response) => {
