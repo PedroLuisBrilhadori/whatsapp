@@ -1,12 +1,12 @@
 import { SessionWhats } from '.';
 
-const whatsApp = new SessionWhats({
-   session: 'session-test',
-   multidevice: true,
-});
+describe('whatsapp not connect', () => {
+   const whatsApp = new SessionWhats({
+      session: 'session-test',
+      multidevice: true,
+   });
 
-describe('whatsapp Test', () => {
-   it('should client up', () => {
+   it('should client is not up', () => {
       expect(whatsApp.up).toBeFalsy();
    });
 
