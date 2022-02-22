@@ -2,6 +2,7 @@
 /node_modules
 /dist
 
+/.tool-versions
 .tool-versions
 
 # tokens for whatsapp
@@ -11,6 +12,7 @@
 /coverage
 
 # firebase config 
+/.env
 .env
 /tokens.json
 
