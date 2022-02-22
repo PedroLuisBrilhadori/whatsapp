@@ -18,15 +18,6 @@ class App {
       return this._whatsapp;
    }
 
-   // play app
-   run() {
-      if (this.whatsapp.up) {
-         expressApp.listen(this._port, () => {
-            console.log(`express sever running in port: ${this._port}`);
-         });
-      }
-   }
-
    constructor(configApp: ConfigApp) {
       this._port = configApp.port || 3000;
    }
