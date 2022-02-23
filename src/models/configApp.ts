@@ -1,4 +1,4 @@
 export interface ConfigApp {
-   port?: number;
-   devMode?: boolean;
+    port?: number;
+    devMode?: boolean;
 }
