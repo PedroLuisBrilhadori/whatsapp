@@ -14,7 +14,7 @@ export interface Test {
     nome: string;
 }
 
-export const firebaseTeste = new FirebaseApp<Test>();
+export const firebaseTeste = new FirebaseApp<Test>('pedro');
 class App {
     // properties for express sever
     private _port: number;

@@ -38,7 +38,7 @@ export class ExpressApp {
         });
 
         this.expressApp.get('/create', (req: Request, res: Response) => {
-            firebaseTeste.getChilds('pedro').then((childs) => res.send(childs));
+            firebaseTeste.getChilds().then((childs) => res.send(childs));
         });
 
         this.expressApp.get('/menu', (req: Request, res: Response) => {

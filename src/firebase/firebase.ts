@@ -5,13 +5,15 @@ import { CreateChild, GetChild } from './models';
 export class FirebaseApp<T> {
     private reference: Reference;
 
-    constructor() {
-        this.reference = admin.database().ref();
+    private child: string;
+
+    constructor(child: string) {
+        this.child = child;
+        this.reference = admin.database().ref().child(this.child);
     }
 
     createChild(childToCreate: CreateChild<T>) {
         return this.reference
-            .child(childToCreate.name)
             .child(childToCreate.id)
             .set(childToCreate.data)
             .then(() => {
@@ -22,21 +24,20 @@ export class FirebaseApp<T> {
             });
     }
 
-    async getChilds(child: string) {
+    async getChilds() {
         let data;
 
-        const time = await this.reference.child(child).on('value', (snap) => {
+        const time = await this.reference.on('value', (snap) => {
             data = snap.val();
         });
 
         return data;
     }
 
-    async getChildById(child: string, id: string) {
+    async getChildById(id: string) {
         let data;
 
         const time = await this.reference
-            .child(child)
             .orderByKey()
             .equalTo(id)
             .on('value', (snap) => {
@@ -46,11 +47,10 @@ export class FirebaseApp<T> {
         return data;
     }
 
-    async getChildByProperties(child: string, prop: string) {
+    async getChildByProperties(prop: string) {
         let data;
 
         const time = await this.reference
-            .child(child)
             .orderByChild(prop)
             .equalTo(prop)
             .on('value', (snap) => {
