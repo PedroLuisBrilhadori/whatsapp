@@ -14,10 +14,10 @@ export class FirebaseApp<T> {
             .child(childToCreate.name)
             .child(childToCreate.id)
             .set(childToCreate.data)
-            .then((child) => {
+            .then(() => {
                 return childToCreate;
             })
-            .catch((error) => {
+            .catch((error: any) => {
                 return error;
             });
     }
@@ -25,9 +25,37 @@ export class FirebaseApp<T> {
     async getChilds(child: string) {
         let data;
 
-        let time = await this.reference.child(child).on('value', (snap) => {
+        const time = await this.reference.child(child).on('value', (snap) => {
             data = snap.val();
         });
+
+        return data;
+    }
+
+    async getChildById(child: string, id: string) {
+        let data;
+
+        const time = await this.reference
+            .child(child)
+            .orderByKey()
+            .equalTo(id)
+            .on('value', (snap) => {
+                data = snap.val();
+            });
+
+        return data;
+    }
+
+    async getChildByProperties(child: string, prop: string) {
+        let data;
+
+        const time = await this.reference
+            .child(child)
+            .orderByChild(prop)
+            .equalTo(prop)
+            .on('value', (snap) => {
+                data = snap.val();
+            });
 
         return data;
     }
