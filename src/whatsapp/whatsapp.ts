@@ -45,8 +45,8 @@ export class SessionWhats {
 
    constructor(configCreate: CreateOptions) {
       this._configCreate = configCreate;
-      this.start()
-         .then((client) => (this.app = client))
-         .catch((err) => (this.app = undefined));
+      // this.start()
+      //    .then((client) => (this.app = client))
+      //    .catch((err) => (this.app = undefined));
    }
 }
