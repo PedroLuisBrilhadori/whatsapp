@@ -71,6 +71,8 @@ export class ExpressApp {
             };
          }
 
+         console.log(cardUpdate);
+
          res.status(200).send('200');
       });
 

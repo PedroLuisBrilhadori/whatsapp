@@ -1,6 +1,5 @@
 import { apiTrelloLinks } from './classes';
 import fetch from 'node-fetch';
-import { TrelloKey, TrelloOauth } from './api_secret';
 
 class TrelloApi {
    listWebHooks() {
